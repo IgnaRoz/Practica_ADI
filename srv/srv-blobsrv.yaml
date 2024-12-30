@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: blob-service
+  labels:
+    app: blob
+spec:
+  type: ClusterIP
+  selector:
+    app: blob
+  ports:
+  - protocol: TCP
+    port: 3003
+    targetPort: port-blob
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blob-deployment
+  labels:
+    app: blob
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blob
+  template:
+    metadata:
+      labels:
+        app: blob
+    spec:
+      containers:
+      - name: blob-container
+        image: service
+        imagePullPolicy: Never
+        ports:
+        - name: port-blob
+          containerPort: 3003

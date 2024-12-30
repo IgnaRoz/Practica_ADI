@@ -6,6 +6,7 @@ para instalar los servicios
 ```
 kubectl apply -f .\srv\srv-authsrv.yaml
 kubectl apply -f .\srv\srv-tokensrv.yaml
+kubectl apply -f .\srv\srv-blobsrv.yaml
 kubectl apply -f .\ingress\ingress.yaml
 ```
 
