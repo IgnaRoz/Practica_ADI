@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: authsrv-service
+  labels:
+    app: authsrv
+spec:
+  type: ClusterIP
+  selector:
+    app: authsrv
+  ports:
+  - protocol: TCP
+    port: 3001
+    targetPort: port-authsrv
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authsrv-deployment
+  labels:
+    app: authsrv
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authsrv
+  template:
+    metadata:
+      labels:
+        app: authsrv
+    spec:
+      containers:
+      - name: authsrv-container
+        image: authsrv
+        imagePullPolicy: Never
+        ports:
+        - name: port-authsrv
+          containerPort: 3001
