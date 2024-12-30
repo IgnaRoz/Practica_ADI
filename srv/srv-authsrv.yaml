@@ -33,6 +33,11 @@ spec:
       - name: authsrv-container
         image: authsrv
         imagePullPolicy: Never
+        env:
+        - name: token_endpoint
+          value: "http://tokensrv-service:3002/api/v1/token"
+        command: ["/bin/sh"]
+        args: ["-c", "venv/bin/auth_service"]
         ports:
         - name: port-authsrv
           containerPort: 3001
