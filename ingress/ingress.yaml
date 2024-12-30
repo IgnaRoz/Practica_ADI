@@ -26,15 +26,15 @@ spec:
             name: tokensrv-service
             port:
               number: 3002
-      - path: /auth/v1(/|$)(.*)
+      - path: /auth(/|$)(.*)
         pathType: ImplementationSpecific
         backend:
           service:
             name: authsrv-service
             port:
               number: 3001
-      - path: /blob/v1
-        pathType: Prefix
+      - path: /blob(/|$)(.*)
+        pathType: ImplementationSpecific
         backend:
           service:
             name: blobsrv-service
