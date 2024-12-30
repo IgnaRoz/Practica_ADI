@@ -17,7 +17,7 @@ y luego accedemos a los logs del pod
 ```
 kubectl logs <nombre del pod> --follow
 ```
-y ahora acemos una peticion al servicio(tokensrv)
+y ahora hacemos una peticion al servicio(tokensrv)
 ```
 curl http://localhost/token/api/v1/status
 ```
