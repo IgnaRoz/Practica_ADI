@@ -4,10 +4,10 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main
 ```
 para instalar los servicios
 ```
-kubectl apply -f .\srv\srv-authsrv.yaml
-kubectl apply -f .\srv\srv-tokensrv.yaml
-kubectl apply -f .\srv\srv-blobsrv.yaml
-kubectl apply -f .\ingress\ingress.yaml
+kubectl apply -f srv/srv-authsrv.yaml
+kubectl apply -f srv/srv-tokensrv.yaml
+kubectl apply -f srv/srv-blobsrv.yaml
+kubectl apply -f ingress/ingress.yaml
 ```
 
 Para probar si funciona correctamente, primero conseguimos el nombre de un pod de la aplicacion

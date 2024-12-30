@@ -14,13 +14,13 @@ rm -rf token_service_rep
 
 # Build and delete authentication repo
 echo "Clonando el repositorio del servicio de autenticación..."
-git clone --branch entregable2 https://github.com/luideoz/Authentication.git adi_auth_srv_rep
+git clone --branch main https://github.com/luideoz/Authentication.git adi_auth_srv_rep
 export STORAGE_FOLDER="storage"
 cd adi_auth_srv_rep
 echo "Instalando dependencias del servicio de autenticación..."
 pip install .
 echo "Iniciando el servicio de autenticación..."
-python3 bootstrap.py
+
 echo "Construyendo el servicio de autenticación..."
 ./build.sh
 cd ..
