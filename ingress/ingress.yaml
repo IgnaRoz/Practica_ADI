@@ -4,6 +4,8 @@ metadata:
   name: my-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/enable-access-log: "true" # Habilitar el registro de acceso
+    nginx.ingress.kubernetes.io/access-log-format: '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" "$request_length" "$request_time"' # Formato del registro de acceso
   labels:
     app: my-app
 spec:
