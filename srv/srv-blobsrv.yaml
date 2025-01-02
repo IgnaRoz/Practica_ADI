@@ -33,6 +33,18 @@ spec:
       - name: blob-container
         image: service
         imagePullPolicy: Never
+        env:
+        - name: TOKEN_SERVICE
+          value: "http://tokensrv-service:3002/api/v1/token"
+          name: BLOB_SERVICE_STORAGE
+          value: "/app/service/storage"
         ports:
         - name: port-blob
           containerPort: 3003
+        volumeMounts:
+        - name: blob-volume
+          mountPath: /app/service/storage
+      volumes:
+        - name: blob-volume
+          persistentVolumeClaim:
+            claimName: pvc-blob

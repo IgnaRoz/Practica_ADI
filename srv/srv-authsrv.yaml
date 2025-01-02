@@ -36,6 +36,8 @@ spec:
         env:
         - name: token_endpoint
           value: "http://tokensrv-service:3002/api/v1/token"
+          name: STORAGE_FOLDER
+          value: "/app/storage"
         command: ["/bin/sh"]
         args: ["-c", "venv/bin/auth_service"]
         ports:
@@ -43,4 +45,8 @@ spec:
           containerPort: 3001
         volumeMounts:
         - name: auth-volume
-          mountPath: /app/auth
+          mountPath: /app/storage
+      volumes:
+        - name: auth-volume
+          persistentVolumeClaim:
+            claimName: pvc-auth
