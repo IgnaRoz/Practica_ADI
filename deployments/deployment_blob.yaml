@@ -12,12 +12,15 @@ spec:
       labels:
         app: blob-service
     spec:
-      nodeSelector:
-        deployment-group: agent
+      #nodeSelector:
+      #deployment-group: agent
       containers:
       - name: blob-service
-        image: docker.io/library/blob-service:latest
-        imagePullPolicy: Never
+        #image: docker.io/library/blob-service:latest
+        image: ubuntu:latest
+        command: ["sleep"]
+        args: ["infinity"]
+          #imagePullPolicy: Never
         ports:
         - containerPort: 3003
         volumeMounts:

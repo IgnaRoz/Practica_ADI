@@ -3,8 +3,9 @@ kind: PersistentVolume
 metadata:
   name: nfs-pv
 spec:
+  storageClassName: local-path  
   capacity:
-    storage: 15Gi  
+    storage: 1Gi  
   accessModes:
     - ReadWriteMany  
   persistentVolumeReclaimPolicy: Retain  
