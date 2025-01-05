@@ -3,6 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: pvc-blob
 spec:
+  storageClassName: blobstorage-test
   accessModes:
     - ReadWriteMany
   resources:

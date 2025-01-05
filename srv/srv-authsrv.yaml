@@ -31,8 +31,12 @@ spec:
     spec:
       containers:
       - name: authsrv-container
-        image: authsrv
-        imagePullPolicy: Never
+        image: 192.168.56.1:5000/authsrv
+        resources:
+          requests:
+            ephemeral-storage: "2Gi"
+          limits:
+            ephemeral-storage: "3Gi"   
         env:
         - name: token_endpoint
           value: "http://tokensrv-service:3002/api/v1/token"

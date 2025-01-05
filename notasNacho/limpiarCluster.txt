@@ -1,0 +1,8 @@
+Para ver antes de un reset lo que se va a borrar
+kubectl get all --all-namespaces
+
+Para limpiar el cluster
+kubectl delete --all all --namespace=default
+kubectl delete pvc --all
+kubectl delete pv --all
+kubectl delete ingress --all

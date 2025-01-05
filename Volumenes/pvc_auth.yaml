@@ -3,6 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: pvc-auth
 spec:
+  storageClassName: authstorage-test
   accessModes:
     - ReadWriteMany
   resources:

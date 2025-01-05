@@ -3,6 +3,7 @@ kind: PersistentVolume
 metadata:
   name: pv-auth
 spec:
+  storageClassName: authStorage
   capacity:
     storage: 1Gi
   volumeMode: Filesystem
