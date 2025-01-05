@@ -3,6 +3,12 @@
 
 # Script para importar imágenes tar en k3s
 
+# Guardar las imágenes de Docker en archivos tar sin sobrescribir
+echo "Guardando las imágenes de Docker en archivos tar..."
+[ ! -f tokensrv.tar ] && docker save -o tokensrv.tar tokensrv
+[ ! -f authsrv.tar ] && docker save -o authsrv.tar authsrv
+[ ! -f service.tar ] && docker save -o service.tar service
+
 # Lista de archivos tar a importar
 imagenes=("tokensrv.tar" "authsrv.tar" "service.tar")
 
