@@ -1,0 +1,2 @@
+k3s_token: "12345" 
+k3s_server_url: "https://10.0.2.7:6443" 

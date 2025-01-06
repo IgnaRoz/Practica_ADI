@@ -1,0 +1,7 @@
+- name: Include server tasks
+  include_tasks: server.yml
+  when: "'server' in group_names"
+
+- name: Include agent tasks
+  include_tasks: agent.yml
+  when: "'agent' in group_names"
