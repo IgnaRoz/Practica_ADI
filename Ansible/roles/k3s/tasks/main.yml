@@ -5,3 +5,7 @@
 - name: Include agent tasks
   include_tasks: agent.yml
   when: "'agent' in group_names"
+
+- name: Launch manifests
+  include_tasks: manifests.yml
+  when: "'server' in group_names"

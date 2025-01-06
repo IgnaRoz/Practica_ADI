@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blob-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blob-service
+  template:
+    metadata:
+      labels:
+        app: blob-service
+    spec:
+      containers:
+      - name: blob-service
+        image: sergiocorne/blob-service:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3003
