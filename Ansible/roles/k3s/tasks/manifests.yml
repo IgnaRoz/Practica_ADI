@@ -3,6 +3,8 @@
     src: "{{ role_path }}/manifests/{{ item }}"
     dest: "{{ manifests_path }}/{{ item }}"
   with_items: 
+    - pv-services.yml
+    - pvc-services.yml
     - deployment-auth.yml
     - deployment-token.yml
     - deployment-blob.yml
@@ -15,6 +17,8 @@
   args:
     executable: /bin/bash
   with_items:
+    - pv-services.yml
+    - pvc-services.yml
     - deployment-auth.yml
     - deployment-token.yml
     - deployment-blob.yml
