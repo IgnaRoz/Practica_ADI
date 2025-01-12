@@ -14,6 +14,18 @@
   command: useradd -g www-data -s /usr/sbin/nologin -d /nonexistent www-data
   ignore_errors: true
 
+- name: Create logs files
+  file:
+    path: "/var/log/"
+    state: "{{ item }}"
+    mode: '0664'
+    owner: ubuntu
+    group: ubuntu
+  with_items:
+    - "{{ nginx_blob_log }}"
+    - "{{ nginx_auth_log }}"
+    - "{{ nginx_token_log }}"
+
 - name: Ensure NGINX server is installed
   apt:
     name: nginx
