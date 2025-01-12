@@ -6,18 +6,23 @@
     state: present
     update_cache: yes
 
-- name: Create www-data user and group if missing
-  command: groupadd www-data
-  ignore_errors: true
+- name: Ensure www-data group exists
+  ansible.builtin.group:
+    name: www-data
+    state: present
 
-- name: Create www-data user if missing
-  command: useradd -g www-data -s /usr/sbin/nologin -d /nonexistent www-data
-  ignore_errors: true
+- name: Ensure www-data user exists
+  ansible.builtin.user:
+    name: www-data
+    group: www-data
+    shell: /usr/sbin/nologin
+    home: /nonexistent
+    state: present
 
 - name: Create logs files
   file:
-    path: "/var/log/"
-    state: "{{ item }}"
+    path: "{{ item }}"
+    state: "touch"
     mode: '0664'
     owner: ubuntu
     group: ubuntu
