@@ -4,6 +4,10 @@ k3s_cluster:
       hosts:
         192.168.56.105:
           ansible_user: ubuntu
+    nfs:
+      hosts: 
+        192.168.56.102:
+          ansible_user: ubuntu
     agent:
       hosts:
         192.168.56.106:
