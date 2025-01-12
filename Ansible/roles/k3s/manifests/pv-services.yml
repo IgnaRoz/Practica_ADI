@@ -9,7 +9,7 @@ spec:
     - ReadWriteMany
   nfs:
     path: "/home/ubuntu/blob"
-    server: 10.0.2.4
+    server: 10.0.2.6
   storageClassName: nfs-blob
 ---
 apiVersion: v1
@@ -23,5 +23,5 @@ spec:
     - ReadWriteMany
   nfs:
     path: "/home/ubuntu/auth"
-    server: 10.0.2.4
+    server: 10.0.2.6
   storageClassName: nfs-auth

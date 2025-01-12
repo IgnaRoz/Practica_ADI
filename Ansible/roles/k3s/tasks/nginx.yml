@@ -23,7 +23,7 @@
 - name: Copy configuration file
   copy:
     src: "{{ role_path }}/nginx_files/{{ item }}"
-    dest: "etc/nginx/nginx.conf"
+    dest: "/etc/nginx/nginx.conf"
   with_items:
     - nginx.conf
 
