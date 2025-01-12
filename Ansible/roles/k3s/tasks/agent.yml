@@ -3,3 +3,9 @@
     curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="agent --server {{ k3s_server_url }} --token {{ k3s_token }}" sh -s -
   args:
     executable: /bin/bash
+
+- name: Ensure NFS client is installed
+  apt:
+    name: nfs-common
+    state: present
+    update_cache: yes
