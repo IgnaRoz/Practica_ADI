@@ -4,6 +4,16 @@
   args:
     executable: /bin/bash
 
+- name: Create manifests directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0664'
+    owner: ubuntu
+    group: ubuntu
+  with_items:
+    - "{{ manifests_path }}"
+
 - name: Ensure NFS client is installed
   apt:
     name: nfs-common

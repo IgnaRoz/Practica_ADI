@@ -1,3 +1,19 @@
+- name: Ensure system dependencies are installed
+  apt:
+    name:
+      - curl
+      - software-properties-common
+    state: present
+    update_cache: yes
+
+- name: Create www-data user and group if missing
+  command: groupadd www-data
+  ignore_errors: true
+
+- name: Create www-data user if missing
+  command: useradd -g www-data -s /usr/sbin/nologin -d /nonexistent www-data
+  ignore_errors: true
+
 - name: Ensure NGINX server is installed
   apt:
     name: nginx
