@@ -49,7 +49,7 @@
 
 - name: Montar directorio NFS
   ansible.builtin.mount:
-    path: /mnt/nfs_share
+    path: "{{ storage_nginx }}"
     src: "10.0.2.6:/{{ storage_nginx }}"
     fstype: nfs
     opts: defaults
