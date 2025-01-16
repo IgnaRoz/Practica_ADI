@@ -1,0 +1,29 @@
+- name: Ensure NFS server is installed
+  apt:
+    name: nfs-kernel-server
+    state: present
+    update_cache: yes
+
+- name: Create NFS directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0777'
+    owner: nobody
+    group: nogroup
+  with_items:
+    - "{{ storage_blob }}"
+    - "{{ storage_auth }}"
+
+- name: Copy export file
+  copy:
+    src: "{{ role_path }}/nfs_files/{{ item }}"
+    dest: "/etc/exports"
+  with_items:
+    - exports
+
+- name: Restart NFS server
+  shell: |
+    exportfs -arv && systemctl restart nfs-kernel-server
+  args:
+    executable: /bin/bash

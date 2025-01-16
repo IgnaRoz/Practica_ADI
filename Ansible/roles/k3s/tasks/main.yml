@@ -1,0 +1,19 @@
+- name: Include server tasks
+  include_tasks: server.yml
+  when: "'server' in group_names"
+
+- name: Provisioning NFS server
+  include_tasks: nfs.yml
+  when: "'nfs' in group_names"
+
+- name: Provisioning NGINX server
+  include_tasks: nginx.yml
+  when: "'nginx' in group_names"
+
+- name: Include agent tasks
+  include_tasks: agent.yml
+  when: "'agent' in group_names"
+
+- name: Launch manifests
+  include_tasks: manifests.yml
+  when: "'server' in group_names"

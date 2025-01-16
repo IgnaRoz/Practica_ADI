@@ -1,0 +1,27 @@
+- name: Copy manifests files
+  copy:
+    src: "{{ role_path }}/manifests/{{ item }}"
+    dest: "{{ manifests_path }}/{{ item }}"
+  with_items: 
+    - pv-services.yml
+    - pvc-services.yml
+    - deployment-auth.yml
+    - deployment-token.yml
+    - deployment-blob.yml
+    - service-auth.yml
+    - service-token.yml
+    - service-blob.yml
+
+- name: Launch Deployments and Services
+  shell: kubectl apply -f {{ manifests_path }}/{{ item }}
+  args:
+    executable: /bin/bash
+  with_items:
+    - pv-services.yml
+    - pvc-services.yml
+    - deployment-auth.yml
+    - deployment-token.yml
+    - deployment-blob.yml
+    - service-auth.yml
+    - service-token.yml
+    - service-blob.yml

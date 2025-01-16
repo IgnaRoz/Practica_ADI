@@ -1,0 +1,18 @@
+k3s_cluster:
+  children:
+    server:
+      hosts:
+        10.0.2.7:
+          ansible_user: ubuntu
+    nfs:
+      hosts: 
+        10.0.2.6:
+          ansible_user: ubuntu
+    agent:
+      hosts:
+        10.0.2.8:
+          ansible_user: ubuntu
+    nginx:
+      hosts:
+        10.0.2.5:
+          ansible_user: ubuntu

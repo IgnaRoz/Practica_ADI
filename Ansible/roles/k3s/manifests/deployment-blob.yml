@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blob-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blob-service
+  template:
+    metadata:
+      labels:
+        app: blob-service
+    spec:
+      containers:
+      - name: blob-service
+        image: sergiocorne/blob-service:latest
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - mountPath: /mnt/blob
+          name: blob-volume
+        ports:
+        - containerPort: 3003
+      volumes:
+      - name: blob-volume
+        persistentVolumeClaim:
+          claimName: pvc-blob
