@@ -1,0 +1,51 @@
+- name: Ensure system dependencies are installed
+  apt:
+    name:
+      - curl
+      - software-properties-common
+    state: present
+    update_cache: yes
+
+- name: Ensure www-data group exists
+  ansible.builtin.group:
+    name: www-data
+    state: present
+
+- name: Ensure www-data user exists
+  ansible.builtin.user:
+    name: www-data
+    group: www-data
+    shell: /usr/sbin/nologin
+    home: /nonexistent
+    state: present
+
+- name: Create logs files
+  file:
+    path: "{{ item }}"
+    state: "touch"
+    mode: '0664'
+    owner: ngnix
+    group: ngnix
+  with_items:
+    - "{{ nginx_blob_log }}"
+    - "{{ nginx_auth_log }}"
+    - "{{ nginx_token_log }}"
+
+- name: Ensure NGINX server is installed
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: Copy configuration file
+  copy:
+    src: "{{ role_path }}/nginx_files/{{ item }}"
+    dest: "/etc/nginx/nginx.conf"
+  with_items:
+    - nginx.conf
+
+- name: Restart NGINX server
+  shell: |
+    service nginx restart
+  args:
+    executable: /bin/bash

@@ -1,0 +1,26 @@
+Para que se haga el despliegue hay que configurar los archivos con las IPs correctas y el token que se quiera
+
+Ademas, hay que asegurarse de que la clave del user desde donde lanzamos Ansible, esta presente en los dos nodos. Es decir, que nos podamos conectar dirrectamente mediante ssh ubuntu@X.X.X.X sin neclasidad de que nos pida ninguna password.
+Por ultimo, asegurarnos de que el user con el que se inicia sesion en las maquinas, en este caso ubuntu, tiene permisos de "sudo", para ello hay que lanzar el comando "sudo usermod -aG sudo <user>"
+Tambien hay que ejecutar "sudo visudo" y añadir al final del mismo "<user> ALL=(ALL) NOPASSWD: ALL" 
+
+Una vez hecho, solo hay que lanzarlo desde la ruta raiz mediante "ansible-playbook playbook.yml"
+
+
+
+
+server@10.0.2.4
+agent@10.0.2.5   
+nfs@10.0.2.7    
+ngnix@10.0.2.8   
+enlace@192.168.56.129
+
+
+sudo mount -t vboxsf adi /home/enlace/adi
+
+ssh-keygen -t rsa -b 4096 -N "" -f ~/.ssh/id_rsa
+ssh-copy-id ubuntu@X.X.X.X
+
+sudo usermod -aG sudo ubuntu
+sudo visudo
+ubuntu ALL=(ALL) NOPASSWD: ALL

@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: blob-service
+  labels:
+    app: blob
+spec:
+  type: ClusterIP
+  selector:
+    app: blob
+  ports:
+  - protocol: TCP
+    port: 3003
+    targetPort: port-blob
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blob-deployment
+  labels:
+    app: blob
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blob
+  template:
+    metadata:
+      labels:
+        app: blob
+    spec:
+      containers:
+      - name: blob-container
+        image: 192.168.56.1:5000/service
+        resources:
+          requests:
+            ephemeral-storage: "2Gi"
+          limits:
+            ephemeral-storage: "3Gi"        
+        env:
+        - name: TOKEN_SERVICE
+          value: "http://tokensrv-service:3002/api/v1"
+        - name: BLOB_SERVICE_STORAGE
+          value: "/app/service/storage"
+        ports:
+        - name: port-blob
+          containerPort: 3003
+        volumeMounts:
+        - name: blob-volume
+          mountPath: /app/service/storage
+      volumes:
+        - name: blob-volume
+          persistentVolumeClaim:
+            claimName: pvc-blob-test

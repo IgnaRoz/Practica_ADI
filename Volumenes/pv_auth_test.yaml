@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-auth-test
+spec:
+  storageClassName: authstorage-test
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /mnt/data

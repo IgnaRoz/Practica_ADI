@@ -1,0 +1,50 @@
+para instalar el controlador nginx-ingress en el cluster de kubernetes, se debe ejecutar el siguiente comando:
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+```
+
+
+para instalar los servicios
+```
+kubectl apply -f srv/srv-authsrv.yaml
+kubectl apply -f srv/srv-tokensrv.yaml
+kubectl apply -f srv/srv-blobsrv.yaml
+kubectl apply -f ingress/ingress.yaml
+```
+
+Para probar si funciona correctamente, primero conseguimos el nombre de un pod de la aplicacion
+```
+kubectl get pods
+```
+y luego accedemos a los logs del pod
+```
+kubectl logs <nombre del pod> --follow
+```
+y ahora hacemos una peticion al servicio(tokensrv)
+```
+curl http://localhost/token/api/v1/status
+```
+
+Si no se puede acceder al servicio, configurar el ngnix como nodeport(por defecto es loadBalancer) asi:
+```
+kubectl apply -f ingress/ingress-nginx-deploy.yaml
+```
+El puerto(por defecto deberia ser el 30080) al que se debe conectar es el que se muestra en el siguiente comando
+```
+kubectl get svc -n ingress-nginx
+```
+
+
+Puede que sea necesario configurar el archivo /etc/hosts para que el dominio tokensrv.local apunte a la ip del cluster
+```
+sudo nano /etc/hosts
+```
+y añadir la siguiente linea
+```
+192.168.56.110 miservicio
+```
+
+Si nada funciona se puede intentar hacer un port-forwarding al servicio del ingress-nginx de la siguiente manera
+```
+kubectl port-forward svc/ingress-nginx-controller 8080:80 -n ingress-nginx
+```
