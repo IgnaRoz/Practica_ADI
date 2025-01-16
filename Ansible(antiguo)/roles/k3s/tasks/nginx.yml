@@ -24,8 +24,8 @@
     path: "{{ item }}"
     state: "touch"
     mode: '0664'
-    owner: ngnix
-    group: ngnix
+    owner: ubuntu
+    group: ubuntu
   with_items:
     - "{{ nginx_blob_log }}"
     - "{{ nginx_auth_log }}"

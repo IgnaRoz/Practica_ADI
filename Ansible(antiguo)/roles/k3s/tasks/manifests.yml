@@ -5,6 +5,9 @@
   with_items: 
     - pv-services.yml
     - pvc-services.yml
+    - deployment-auth.yml
+    - deployment-token.yml
+    - deployment-blob.yml
     - service-auth.yml
     - service-token.yml
     - service-blob.yml
@@ -16,6 +19,9 @@
   with_items:
     - pv-services.yml
     - pvc-services.yml
+    - deployment-auth.yml
+    - deployment-token.yml
+    - deployment-blob.yml
     - service-auth.yml
     - service-token.yml
     - service-blob.yml

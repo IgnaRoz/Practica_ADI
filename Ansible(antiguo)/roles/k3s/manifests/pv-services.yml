@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-blob
+spec:
+  capacity:
+    storage: 100Mi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: "/home/ubuntu/blob"
+    server: 10.0.2.6
+  storageClassName: nfs-blob
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-auth
+spec:
+  capacity:
+    storage: 100Mi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: "/home/ubuntu/auth"
+    server: 10.0.2.6
+  storageClassName: nfs-auth

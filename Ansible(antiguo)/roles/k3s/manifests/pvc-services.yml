@@ -1,23 +1,23 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pvc-auth
+  name: pvc-blob
 spec:
-  storageClassName: authstorage
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 1Gi
+      storage: 100Mi
+  storageClassName: nfs-blob
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pvc-blob
+  name: pvc-auth
 spec:
-  storageClassName: blobstorage
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 1Gi
+      storage: 100Mi
+  storageClassName: nfs-auth

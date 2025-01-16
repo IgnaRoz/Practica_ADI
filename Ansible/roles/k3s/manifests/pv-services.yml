@@ -1,27 +1,31 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: pv-blob
+  name: pv-auth
 spec:
+  storageClassName: authstorage
   capacity:
-    storage: 100Mi
+    storage: 1Gi
+  volumeMode: Filesystem
   accessModes:
     - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
   nfs:
-    path: "/home/ubuntu/blob"
-    server: 10.0.2.6
-  storageClassName: nfs-blob
+    path:  "/home/nfs/auth"
+    server: 10.0.2.7
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: pv-auth
+  name: pv-blob
 spec:
+  storageClassName: blobstorage
   capacity:
-    storage: 100Mi
+    storage: 1Gi
+  volumeMode: Filesystem
   accessModes:
     - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
   nfs:
-    path: "/home/ubuntu/auth"
-    server: 10.0.2.6
-  storageClassName: nfs-auth
+    path:  "/home/nfs/blob"
+    server: 10.0.2.7
