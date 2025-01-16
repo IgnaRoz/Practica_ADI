@@ -31,6 +31,30 @@
     - "{{ nginx_auth_log }}"
     - "{{ nginx_token_log }}"
 
+- name: Create HTML directorie
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0777'
+    owner: nobody
+    group: nogroup
+  with_items:
+    - "{{ storage_nginx }}"
+
+- name: Ensure NFS client is installed
+  apt:
+    name: nfs-common
+    state: present
+    update_cache: yes
+
+- name: Montar directorio NFS
+  ansible.builtin.mount:
+    path: /mnt/nfs_share
+    src: "10.0.2.6:/{{ storage_nginx }}"
+    fstype: nfs
+    opts: defaults
+    state: mounted
+ 
 - name: Ensure NGINX server is installed
   apt:
     name: nginx

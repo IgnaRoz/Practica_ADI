@@ -23,6 +23,13 @@
   with_items:
     - exports
 
+- name: Copy index
+  copy:
+    src: "{{ role_path }}/nfs_files/{{ item }}"
+    dest: "{{ storage_nginx }}"
+  with_items:
+    - index.html
+
 - name: Copy bootstrap
   copy:
     src: "{{ role_path }}/nfs_files/{{ item }}"
