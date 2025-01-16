@@ -12,6 +12,7 @@ spec:
   - protocol: TCP
     port: 3001
     targetPort: port-authsrv
+    nodePort: 30001
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -31,7 +32,7 @@ spec:
     spec:
       containers:
       - name: authsrv-container
-        image: 192.168.56.1:5000/authsrv:latest
+        image: nachorozas/authsrv:latest
         imagePullPolicy: Always 
         env:
         - name: token_endpoint

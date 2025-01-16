@@ -12,6 +12,7 @@ spec:
   - protocol: TCP
     port: 3003
     targetPort: port-blob
+    nodePort: 30003
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -31,7 +32,7 @@ spec:
     spec:
       containers:
       - name: blob-container
-        image: 192.168.56.1:5000/service    
+        image: nachorozas/service    
         env:
         - name: TOKEN_SERVICE
           value: "http://tokensrv-service:3002/api/v1"

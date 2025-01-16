@@ -24,3 +24,12 @@ ssh-copy-id ubuntu@X.X.X.X
 sudo usermod -aG sudo ubuntu
 sudo visudo
 ubuntu ALL=(ALL) NOPASSWD: ALL
+
+
+scp bootstrap.py nfs@10.0.2.7:/home/nfs/
+export ADMINPASS="admin"
+export STORAGE_FOLDER="/home/nfs/auth"
+python3 bootstrap.py
+
+
+curl -X PUT "http://10.0.2.4:30002/api/v1/token" -H "Content-Type: application/json" -d '{"username": "administrator","pass_hash": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"}' --max-time 5

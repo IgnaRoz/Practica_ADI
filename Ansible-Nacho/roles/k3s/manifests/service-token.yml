@@ -12,6 +12,7 @@ spec:
   - protocol: TCP
     port: 3002
     targetPort: port-tokensrv
+    nodePort: 30002
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -31,7 +32,7 @@ spec:
     spec:
       containers:
       - name: tokensrv-container
-        image: 192.168.56.1:5000/tokensrv
+        image: nachorozas/tokensrv
         command: ["token_service"] # Sustituye el comando por defecto del dokefile del contenedor al iniciar
         args: ["-a","http://authsrv-service:3001/auth/v1"] # No se usa ip, se usa el nombre del servicio definido mas arriba
         ports:
