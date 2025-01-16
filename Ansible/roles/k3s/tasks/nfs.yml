@@ -22,6 +22,25 @@
   with_items:
     - exports
 
+- name: Create env variables
+  shell: |
+    export ADMINPASS="admin" = admin && export STORAGE_FOLDER="/home/nfs/auth"
+  agrs:
+    executable: /bin/bash
+
+- name: Copy bootstrap
+  copy:
+    src: "{{ role_path }}/nfs_files/{{ item }}"
+    dest: "/home/ubuntu"
+  with_items:
+    - bootstrap.py
+
+- name: Launch bootstrap
+  shell: |
+    chmod +x /home/ubuntu/bootstrap.py && ./home/ubuntu/bootstrap.py
+  args:
+    executable: /bin/bash
+
 - name: Restart NFS server
   shell: |
     exportfs -arv && systemctl restart nfs-kernel-server
