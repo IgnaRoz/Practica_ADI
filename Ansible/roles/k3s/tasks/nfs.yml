@@ -14,6 +14,7 @@
   with_items:
     - "{{ storage_blob }}"
     - "{{ storage_auth }}"
+    - "{{ storage_nginx }}"
 
 - name: Copy export file
   copy:
@@ -21,12 +22,6 @@
     dest: "/etc/exports"
   with_items:
     - exports
-
-- name: Create env variables
-  shell: |
-    export ADMINPASS="admin" = admin && export STORAGE_FOLDER="/home/nfs/auth"
-  agrs:
-    executable: /bin/bash
 
 - name: Copy bootstrap
   copy:
@@ -37,7 +32,8 @@
 
 - name: Launch bootstrap
   shell: |
-    chmod +x /home/ubuntu/bootstrap.py && ./home/ubuntu/bootstrap.py
+    export ADMINPASS="admin" && export STORAGE_FOLDER="/home/ubuntu/auth"
+    python3 /home/ubuntu/bootstrap.py
   args:
     executable: /bin/bash
 
@@ -46,3 +42,4 @@
     exportfs -arv && systemctl restart nfs-kernel-server
   args:
     executable: /bin/bash
+

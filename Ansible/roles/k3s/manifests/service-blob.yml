@@ -30,6 +30,8 @@ spec:
       labels:
         app: blob
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: agent
       containers:
       - name: blob-container
         image: nachorozas/service    
