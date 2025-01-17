@@ -9,7 +9,7 @@
     path: "{{ item }}"
     state: directory
     mode: '0664'
-    owner: server
+    owner: server 
     group: server
   with_items:
     - "{{ manifests_path }}"

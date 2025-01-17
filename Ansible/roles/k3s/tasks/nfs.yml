@@ -14,6 +14,7 @@
   with_items:
     - "{{ storage_blob }}"
     - "{{ storage_auth }}"
+    - "{{ storage_nginx }}"
 
 - name: Copy export file
   copy:
@@ -22,8 +23,30 @@
   with_items:
     - exports
 
+- name: Copy index
+  copy:
+    src: "{{ role_path }}/nfs_files/{{ item }}"
+    dest: "{{ storage_nginx }}"
+  with_items:
+    - index.html
+
+- name: Copy bootstrap
+  copy:
+    src: "{{ role_path }}/nfs_files/{{ item }}"
+    dest: "/home/nfs"
+  with_items:
+    - bootstrap.py
+
+- name: Launch bootstrap
+  shell: |
+    export ADMINPASS="admin" && export STORAGE_FOLDER="/home/nfs/auth"
+    python3 /home/nfs/bootstrap.py
+  args:
+    executable: /bin/bash
+
 - name: Restart NFS server
   shell: |
     exportfs -arv && systemctl restart nfs-kernel-server
   args:
     executable: /bin/bash
+

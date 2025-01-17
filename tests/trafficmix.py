@@ -9,9 +9,9 @@ ADMIN_AUTH_CODE = hashlib.sha256(f'{ADMIN_USERNAME}{ADMIN_PASS_HASH}'.encode()).
 USER_USERNAME = 'user'
 USER_PASS_HASH = hashlib.sha256('userpass'.encode()).hexdigest()
 USER_PASS_CODE = hashlib.sha256(f'{USER_USERNAME}{USER_PASS_HASH}'.encode()).hexdigest()
-URI_AUTH = 'http://miservicio:30080/auth/auth/v1'
+URI_AUTH = 'http://10.0.2.8/auth/v1'
 #URI_AUTH = 'http://192.168.1.100:3000/auth/v1'
-URI_TOKEN = 'http://miservicio:30080/token/api/v1'
+URI_TOKEN = 'http://10.0.2.8/api/v1'
 #URI_TOKEN = 'http://192.168.1.100:3002/api/v1'
 
 class TestTrafficMix(unittest.TestCase):
@@ -30,7 +30,7 @@ class TestTrafficMix(unittest.TestCase):
         self.assertIn("admin", response.json()["roles"])
 
         #eliminamos previamente el usuario nacho(sin comprobar si existe solo para asegurarnos que no existe)
-        response = requests.delete(URI_AUTH + f"/user/nacho",headers={"Content-Type": "application/json","AuthToken":token_admin}, timeout=10)
+        #response = requests.delete(URI_AUTH + f"/user/nacho",headers={"Content-Type": "application/json","AuthToken":token_admin}, timeout=10)
         # Creamos un nuevo usuario nacho
         response = requests.put(URI_AUTH + "/user",headers={"Content-Type": "application/json","AuthToken":token_admin}, json={"username": "nacho", "password": "nachopass", 'role':'user'} )
         self.assertIn(response.status_code, [200, 201,204])
@@ -42,7 +42,9 @@ class TestTrafficMix(unittest.TestCase):
         self.assertIn("user", response.json()["role"])
 
         #Creamos un token para el usuario nacho
-        response = requests.put(URI_TOKEN + "/token", json={"username":    "nacho", "pass_hash": USER_PASS_HASH}, timeout=5)
+        nacho_pass_hash = hashlib.sha256('nachopass'.encode()).hexdigest()
+
+        response = requests.put(URI_TOKEN + "/token", json={"username":    "nacho", "pass_hash": nacho_pass_hash}, timeout=5)
         self.assertEqual(response.status_code, 200)
         token_nacho =response.json()["token"]
 
@@ -54,7 +56,7 @@ class TestTrafficMix(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         #comprobamos que el json de respuesta tiene el username nacho y dentro del array roles el rol admin
         self.assertEqual(response.json()["username"], "nacho")
-        self.assertIn("admin", response.json()["roles"])
+        self.assertIn("admin", response.json()["role"])
 
         # Verificamos el usuario nacho con la password supernachopass
         nacho_pass_hash = hashlib.sha256('supernachopass'.encode()).hexdigest()

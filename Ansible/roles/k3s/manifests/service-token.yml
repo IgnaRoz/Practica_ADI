@@ -30,6 +30,8 @@ spec:
       labels:
         app: tokensrv
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: agent
       containers:
       - name: tokensrv-container
         image: nachorozas/tokensrv
