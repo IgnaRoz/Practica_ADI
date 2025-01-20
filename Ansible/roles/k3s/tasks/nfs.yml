@@ -44,6 +44,10 @@
   args:
     executable: /bin/bash
 
+- name: Set permissions user.db
+  shell: |
+    chmod 777 /home/ubuntu/auth/users.db
+
 - name: Restart NFS server
   shell: |
     exportfs -arv && systemctl restart nfs-kernel-server
