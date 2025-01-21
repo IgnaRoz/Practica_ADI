@@ -9,10 +9,10 @@ ADMIN_AUTH_CODE = hashlib.sha256(f'{ADMIN_USERNAME}{ADMIN_PASS_HASH}'.encode()).
 USER_USERNAME = 'user'
 USER_PASS_HASH = hashlib.sha256('userpass'.encode()).hexdigest()
 USER_PASS_CODE = hashlib.sha256(f'{USER_USERNAME}{USER_PASS_HASH}'.encode()).hexdigest()
-URI_AUTH = 'http://miservicio:30080/auth/auth/v1'
-#URI_AUTH = 'http://192.168.1.100:3000/auth/v1'
-URI_TOKEN = 'http://miservicio:30080/token/api/v1'
-#URI_TOKEN = 'http://192.168.1.100:3002/api/v1'
+#URI_AUTH = 'http://miservicio:30080/auth/auth/v1'
+URI_AUTH = 'http://192.168.56.110/auth/v1'
+#URI_TOKEN = 'http://miservicio:30080/token/api/v1'
+URI_TOKEN = 'http://192.168.56.110/api/v1'
 
 class TestTrafficMix(unittest.TestCase):
     def test_traffic_mix_auth(self):
