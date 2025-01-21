@@ -39,3 +39,4 @@ Para comprobar que nuestro cluster de kubernetes se a lanzado de manera correcta
 corriendo de forma correcta.
 
 ### TrafficMix
+Para verificar de forma mas completa el despliegue y los servicios se dispone de un trafficmix que efectúa varias peticiones predeterminadas. El trafficmix se puede ejecutar con el comando ```python3 trafficmix.py```, se puede lanzar desde el nodo ```ansible``` pero también es accesible desde fuera de la maquina virtual usando la ip de la maquina ```NGINX```
