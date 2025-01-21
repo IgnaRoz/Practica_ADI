@@ -42,7 +42,8 @@ class TestTrafficMix(unittest.TestCase):
         self.assertIn("user", response.json()["role"])
 
         #Creamos un token para el usuario nacho
-        response = requests.put(URI_TOKEN + "/token", json={"username":    "nacho", "pass_hash": USER_PASS_HASH}, timeout=5)
+        pass_hash = hashlib.sha256('nachopass'.encode()).hexdigest()
+        response = requests.put(URI_TOKEN + "/token", json={"username":    "nacho", "pass_hash": pass_hash}, timeout=5)
         self.assertEqual(response.status_code, 200)
         token_nacho =response.json()["token"]
 
