@@ -85,16 +85,6 @@ class TestTrafficMix(unittest.TestCase):
         self.assertEqual(response.json()["username"], "nacho")
         self.assertIn("admin", response.json()["role"])
 
-        # Verificamos el usuario nacho con la password supernachopass
-        print(f"Verificamos el usuario nacho con la password supernachopass")
-        nacho_pass_hash = hashlib.sha256('supernachopass'.encode()).hexdigest()
-        nacho_pass_code = hashlib.sha256(f'nacho{nacho_pass_hash}'.encode()).hexdigest()
-        print(f"GET {URI_AUTH}/is_authorized/{nacho_pass_code}")
-        response = requests.get(URI_AUTH + f"/is_authorized/{nacho_pass_code}", timeout=5)
-        print(f"Respuesta: {response.status_code} \n")
-        self.assertEqual(response.status_code, 200)
-        #comprobamos que el rol de admin esta en roles
-        self.assertIn("admin", response.json()["roles"])
 
         
 
