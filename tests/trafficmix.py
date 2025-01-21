@@ -13,6 +13,11 @@ URI_AUTH = 'http://10.0.2.8/auth/v1'
 #URI_AUTH = 'http://192.168.1.100:3000/auth/v1'
 URI_TOKEN = 'http://10.0.2.8/api/v1'
 #URI_TOKEN = 'http://192.168.1.100:3002/api/v1'
+'''
+curl -X PUT "http://192.168.56.110/api/v1/token" -H "Content-Type: application/json" -d '{"username": "administrator", "pass_hash": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"}'
+
+curl -X PUT "http://192.168.56.110/auth/v1/user" -H "Content-Type: application/json" -H "AuthToken: 94402ac26de82b49fe0bbf90d026fe7c" -d '{"username": "nacho", "password": "nachopass", "role": "user"}'
+'''
 
 class TestTrafficMix(unittest.TestCase):
     def test_traffic_mix_auth(self):
@@ -30,7 +35,7 @@ class TestTrafficMix(unittest.TestCase):
         self.assertIn("admin", response.json()["roles"])
 
         #eliminamos previamente el usuario nacho(sin comprobar si existe solo para asegurarnos que no existe)
-        #response = requests.delete(URI_AUTH + f"/user/nacho",headers={"Content-Type": "application/json","AuthToken":token_admin}, timeout=10)
+        response = requests.delete(URI_AUTH + f"/user/nacho",headers={"Content-Type": "application/json","AuthToken":token_admin}, timeout=10)
         # Creamos un nuevo usuario nacho
         response = requests.put(URI_AUTH + "/user",headers={"Content-Type": "application/json","AuthToken":token_admin}, json={"username": "nacho", "password": "nachopass", 'role':'user'} )
         self.assertIn(response.status_code, [200, 201,204])
