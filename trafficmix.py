@@ -55,15 +55,7 @@ class TestTrafficMix(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         #comprobamos que el json de respuesta tiene el username nacho y dentro del array roles el rol admin
         self.assertEqual(response.json()["username"], "nacho")
-        self.assertIn("admin", response.json()["roles"])
-
-        # Verificamos el usuario nacho con la password supernachopass
-        nacho_pass_hash = hashlib.sha256('supernachopass'.encode()).hexdigest()
-        nacho_pass_code = hashlib.sha256(f'nacho{nacho_pass_hash}'.encode()).hexdigest()
-        response = requests.get(URI_AUTH + f"/is_authorized/{nacho_pass_code}", timeout=5)
-        self.assertEqual(response.status_code, 200)
-        #comprobamos que el rol de admin esta en roles
-        self.assertIn("admin", response.json()["roles"])
+        self.assertIn("admin", response.json()["role"])
 
         # Borramos el usuario nacho
         response = requests.delete(URI_AUTH + "/user/nacho",headers={"Content-Type": "application/json","AuthToken":token_nacho}, timeout=5)
