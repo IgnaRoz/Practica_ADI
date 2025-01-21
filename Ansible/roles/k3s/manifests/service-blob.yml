@@ -37,7 +37,7 @@ spec:
         image: nachorozas/service    
         env:
         - name: TOKEN_SERVICE
-          value: "http://tokensrv-service:3002/api/v1"
+          value: "http://tokensrv-service:3002"
         - name: BLOB_SERVICE_STORAGE
           value: "/app/service/storage"
         ports:
