@@ -34,7 +34,7 @@ spec:
         kubernetes.io/hostname: agent
       containers:
       - name: authsrv-container
-        image: nachorozas/authsrv:latest
+        image: luisdeoz/authsrv:latest
         imagePullPolicy: Always 
         env:
         - name: token_endpoint
