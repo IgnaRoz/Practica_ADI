@@ -1,4 +1,4 @@
-k3s_token: "12345" 
+k3s_token: "TWR3Iin3Gsbq68povxbIrpFFhX5+Q/YDh1Je6FYBpYw=" 
 k3s_server_url: "https://10.0.2.7:6443" 
 manifests_path: "/home/ubuntu/manifests"
 storage_blob: "/home/ubuntu/blob"
