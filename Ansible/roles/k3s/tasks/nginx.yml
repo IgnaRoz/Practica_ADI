@@ -19,18 +19,6 @@
     home: /nonexistent
     state: present
 
-- name: Create logs files
-  file:
-    path: "{{ item }}"
-    state: "touch"
-    mode: '0664'
-    owner: ubuntu
-    group: ubuntu
-  with_items:
-    - "{{ nginx_blob_log }}"
-    - "{{ nginx_auth_log }}"
-    - "{{ nginx_token_log }}"
-
 - name: Create HTML directorie
   file:
     path: "{{ item }}"
